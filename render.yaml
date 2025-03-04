@@ -7,7 +7,7 @@ services:
     startCommand: "gunicorn chatroom.wsgi:application --bind 0.0.0.0:10000"
     envVars:
       - key: DATABASE_URL
-        value: "your-database-url-here"  # Replace with your actual database URL
+        value: "postgresql://mydatabase_cdje_user:HBe3KZ7hvSEMaG7a91ofJkxpc1HkR2Dt@dpg-cv3chut6l47c73fc6jr0-a.oregon-postgres.render.com/mydatabase_cdje"  # Replace with your actual database URL
       - key: SECRET_KEY
         generateValue: true
 
