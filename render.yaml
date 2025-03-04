@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: chatroom
+    runtime: python  # ✅ Added runtime
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn chatroom.wsgi:application --bind 0.0.0.0:10000"
+    envVars:
+      - key: DATABASE_URL
+        value: "your-database-url-here"  # Replace with your actual database URL
+      - key: SECRET_KEY
+        generateValue: true
+
+databases:
+  - name: chatroom-db
+    plan: free
+    ipAllowList: []  # Allow all IPs to access the database
