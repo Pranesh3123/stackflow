@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-f4fiq-akvj$oerb0x7vq&h4s^4u+n&5*whr-wp07-*bhn=pc(j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -47,6 +47,7 @@ AUTH_USER_MODEL = 'stackflow.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,10 +81,7 @@ WSGI_APPLICATION = 'chatroom.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.config(default=os.getenv("postgresql://mydatabase_cdje_user:HBe3KZ7hvSEMaG7a91ofJkxpc1HkR2Dt@dpg-cv3chut6l47c73fc6jr0-a.oregon-postgres.render.com/mydatabase_cdje"))
 }
 
 
@@ -123,6 +121,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
